@@ -1,0 +1,25 @@
+name: Fetch RSS Articles
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  fetch-rss:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Fetch RSS Articles
+        uses: nahuelhds/rss-fetch-action@v0
+        with:
+          feed_urls: https://feed-s.github.io/feeds/szclsya.xml
+          destination_folder: ./test
+
+      - name: Commit and push changes to repository
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Update RSS articles"

@@ -1,4 +1,4 @@
-name: Fetch RSS Articles
+name: Fetch and Merge RSS Articles
 
 on:
   push:
@@ -19,7 +19,11 @@ jobs:
           feed_urls: https://feed-s.github.io/feeds/szclsya.xml
           destination_folder: ./test/szclsya.xml
 
+      - name: Merge RSS Feeds
+        run: |
+          python merge_rss.py
+
       - name: Commit and push changes to repository
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Update RSS articles"
+          commit_message: "Update and merge RSS articles"
